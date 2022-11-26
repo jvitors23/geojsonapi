@@ -1,0 +1,26 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@2.0.3
+
+jobs:
+  lint:
+    docker:
+      - image: cimg/python:3.10.2
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Install flake8
+          command: |
+            pip install flake8
+      - run:
+          name: Lint
+          command: flake8 .
+
+workflows:
+  version: 2
+  quality:
+    jobs:
+      - lint

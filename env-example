@@ -1,0 +1,2 @@
+SECRET_KEY=SuperS&CRETKey
+DATABASE_URL=postgresql://admin:admin@localhost:5432/billing

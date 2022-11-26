@@ -21,7 +21,12 @@ DEBUG = env("DEBUG")
 # exception if SECRET_KEY not in os.environ
 SECRET_KEY = env("SECRET_KEY")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "localhost:8001", "127.0.0.1", "127.0.0.1:8000"]
+CSRF_TRUSTED_ORIGINS = ["http://" + host for host in ALLOWED_HOSTS]
+
+allowed_hosts = env.list("ALLOWED_HOSTS", default=None)
+if allowed_hosts:
+    ALLOWED_HOSTS.extend(allowed_hosts)
 
 
 # Application definition

@@ -1,12 +1,9 @@
-version: 2.1
-
+version: '2.1'
 orbs:
-  python: circleci/python@2.0.3
-
+  python: circleci/python@1.0.0
 jobs:
-  pep8:
-    docker:
-      - image: cimg/python:3.10.2
+  check_pep8:
+    executor: python/default
     steps:
       - checkout
       - python/install-packages:
@@ -14,10 +11,8 @@ jobs:
       - run:
           command: |
             poetry run flake8 .
-          name: Check PEP8 format
-
+          name: Check pep8 format
 workflows:
-  version: 2
-  quality:
+  main:
     jobs:
-      - pep8
+      - check_pep8

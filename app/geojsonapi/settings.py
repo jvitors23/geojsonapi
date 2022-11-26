@@ -83,6 +83,8 @@ DATABASES = {
     "default": env.db(),
 }
 
+DATABASES["default"]["TEST"] = {"NAME": "test_geojson"}
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 

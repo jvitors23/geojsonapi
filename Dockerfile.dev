@@ -35,7 +35,7 @@ RUN poetry install
 
 EXPOSE 8000
 
-COPY app /app
+COPY geojsonapi /app
 
 RUN mkdir -p /vol/web/media
 RUN mkdir -p /vol/web/static

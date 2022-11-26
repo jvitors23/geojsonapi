@@ -12,14 +12,14 @@ env = environ.Env(
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Take environment variables from .env file
-environ.Env.read_env(os.path.join(BASE_DIR, "../../.env"))
+environ.Env.read_env(os.path.join(BASE_DIR, "../.env"))
 
 # False if not in os.environ because of casting above
 DEBUG = env("DEBUG")
 
 # Raises Django's ImproperlyConfigured
 # exception if SECRET_KEY not in os.environ
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = env("SECRET_KEY", default="supersecretkey")
 
 ALLOWED_HOSTS = ["localhost", "localhost:8001", "127.0.0.1", "127.0.0.1:8000"]
 CSRF_TRUSTED_ORIGINS = ["http://" + host for host in ALLOWED_HOSTS]
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = "users.User"

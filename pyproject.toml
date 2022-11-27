@@ -15,6 +15,7 @@ djangorestframework = "^3.14.0"
 pytest = "^7.2.0"
 pytest-env = "^0.8.1"
 django-extensions = "^3.2.1"
+pycountry = "^22.3.5"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -38,6 +39,7 @@ build-backend = "poetry.core.masonry.api"
 python_files = ["test_*.py", "*_test.py", "tests.py"]
 env = [
     "DJANGO_SETTINGS_MODULE=geojsonapi.settings",
+    "DATABASE_URL=postgres://postgres:postgres@localhost:5432/geojson_db",
 ]
 filterwarnings = [
      "ignore:The --rsyncdir command line argument and rsyncdirs config variable are deprecated.:DeprecationWarning",

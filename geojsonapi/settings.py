@@ -40,14 +40,12 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-MY_APPS = [
-    "geojsonapi.apps.users",
-    "django_extensions",
-]
+MY_APPS = ["geojsonapi.apps.users", "geojsonapi.apps.providers"]
 
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
+    "django_extensions",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + MY_APPS

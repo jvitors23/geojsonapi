@@ -29,13 +29,11 @@ RUN python -m pip install --upgrade pip \
 RUN mkdir /app
 WORKDIR /app
 
-COPY pyproject.toml poetry.lock /app/
+COPY . .
 
 RUN poetry install
 
 EXPOSE 8000
-
-COPY geojsonapi /app
 
 RUN mkdir -p /vol/web/media
 RUN mkdir -p /vol/web/static

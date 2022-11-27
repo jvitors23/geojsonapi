@@ -6,7 +6,7 @@ volumes:
 services:
   database:
     image: postgis/postgis:13-3.1
-    restart: always
+    restart: on-failure
     expose:
       - "5432"
     ports:
@@ -24,8 +24,8 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./geojsonapi:/app
-    command: sh -c "/app/wait_db.sh database:5432 --
+      - ./:/app
+    command: sh -c "./wait_db.sh localhost:5432 --
       python manage.py makemigrations &&
       python manage.py migrate &&
       python manage.py runserver 0.0.0.0:8000"
@@ -34,3 +34,4 @@ services:
       dockerfile: Dockerfile.dev
     depends_on:
       - database
+    restart: on-failure

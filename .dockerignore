@@ -1,0 +1,14 @@
+.*
+docker*
+.coveragerc
+.coverage
+.circleci
+Docker*
+build*
+__pycache__
+.venv
+static*
+.pytest_cache
+.pre-commit-config.yaml
+*.log
+.git*

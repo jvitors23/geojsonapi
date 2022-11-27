@@ -13,7 +13,7 @@ jobs:
             poetry run flake8 .
           name: Check pep8 format
 
-  build:
+  build_docker_image:
     working_directory: /app
     docker:
       - image: docker:17.05.0-ce-git
@@ -30,8 +30,42 @@ jobs:
           command: |
             cp .env-example .env
             docker-compose build
+
+  test:
+    working_directory: ~/circleci-django
+    docker:
+      - image: circleci/python:3.9.6
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/geojson_db
+
+      - image: postgis/postgis:15-master
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: geojson_db
+          POSTGRES_PASSWORD: postgres
+
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: |
+            sudo pip uninstall poetry -y
+            sudo pip install poetry==1.2.2
+            poetry install
+      - run:
+          name: Wait for Postgres
+          command: |
+            sudo wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+            sudo dockerize -wait tcp://localhost:5432 -timeout 10m
+      - run:
+          name: Run tests
+          command: |
+            poetry run pytest geojsonapi/apps --cov . -n auto
+
 workflows:
-  main:
+  quality:
     jobs:
       - check_pep8
-      - build
+      - build_docker_image
+      - test

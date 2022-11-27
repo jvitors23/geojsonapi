@@ -5,7 +5,7 @@ volumes:
 
 services:
   database:
-    image: postgis/postgis:13-3.1
+    image: postgis/postgis:15-master
     restart: on-failure
     expose:
       - "5432"

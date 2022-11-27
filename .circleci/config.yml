@@ -61,7 +61,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            poetry run pytest geojsonapi/apps --cov . -n auto
+            poetry run pytest geojsonapi/apps --cov . -n 8
 
 workflows:
   quality:

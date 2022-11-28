@@ -5,5 +5,5 @@
 ### Run tests
 
 ```
-docker-compose exec app bash -c "poetry run pytest geojsonapi/apps --cov . -n 8"
+docker-compose run app bash -c "pytest geojsonapi/apps --cov . -n 8"
 ```

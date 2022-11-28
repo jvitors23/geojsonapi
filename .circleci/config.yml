@@ -73,12 +73,6 @@ jobs:
                 proj \
                 gdal
             poetry install
-
-      - run:
-          name: Wait for Postgres
-          command: |
-            wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-            dockerize -wait tcp://localhost:5432 -timeout 10m
       - run:
           name: Run tests
           command: |

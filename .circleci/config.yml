@@ -30,7 +30,7 @@ jobs:
           command: |
             cp .env-example .env
             docker-compose build
-            docker-compose run app bash -c "poetry run pytest geojsonapi/apps --cov . -n 8"
+            docker-compose run app bash -c "pytest geojsonapi/apps --cov . -n 8"
 
 workflows:
   quality:

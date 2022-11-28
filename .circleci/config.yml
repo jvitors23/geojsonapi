@@ -55,7 +55,7 @@ jobs:
             sudo pip uninstall poetry -y
             sudo pip install poetry==1.2.2
             poetry install
-            sudo apt install geos gdal -y
+            sudo apt install gdal -y
       - run:
           name: Wait for Postgres
           command: |

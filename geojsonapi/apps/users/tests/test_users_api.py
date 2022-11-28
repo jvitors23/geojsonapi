@@ -13,9 +13,9 @@ User = get_user_model()
 class TestUserPublicApi:
     """Test the user API (public)"""
 
-    CREATE_USER_URL = reverse_lazy("users:create", kwargs={"version": "v1"})
-    ME_URL = reverse_lazy("users:manage-user", kwargs={"version": "v1"})
-    TOKEN_URL = reverse_lazy("users:token", kwargs={"version": "v1"})
+    CREATE_USER_URL = reverse_lazy("users:create")
+    ME_URL = reverse_lazy("users:manage-user")
+    TOKEN_URL = reverse_lazy("users:token")
 
     def test_create_valid_user_success(self, api_client: APIClient) -> None:
         """Test creating user with valid payload is successful"""
@@ -27,7 +27,6 @@ class TestUserPublicApi:
         assert user.check_password(payload["password"])
         assert "password" not in response.data
 
-    @pytest.mark.django_db
     def test_user_exists(self, api_client: APIClient, user: User) -> None:
         """Test creating a user that already exists fails"""
         payload = {"email": user.email, "password": "test123", "name": user.name}

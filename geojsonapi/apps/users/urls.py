@@ -7,5 +7,5 @@ app_name = "users"
 urlpatterns = [
     path("signup/", CreateUserView.as_view(), name="create"),
     path("token/", CreateTokenView.as_view(), name="token"),
-    path("users/", ManageUserView.as_view(), name="manage-user"),
+    path("me/", ManageUserView.as_view(), name="manage-user"),
 ]

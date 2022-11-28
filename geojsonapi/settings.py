@@ -50,6 +50,7 @@ MY_APPS = ["geojsonapi.apps.users", "geojsonapi.apps.providers"]
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
+    "drf_spectacular",
     "django_extensions",
 ]
 
@@ -149,6 +150,14 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.TokenAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ),
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 LOGIN_URL = "admin:index"
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "GeoJSON API",
+    "DESCRIPTION": "GeoJSON API",
+    "VERSION": "1.0",
+    "SCHEMA_PATH_PREFIX": r"/api/v[0-9]/",
+}

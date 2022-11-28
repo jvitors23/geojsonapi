@@ -34,7 +34,7 @@ jobs:
   test:
     working_directory: ~/circleci-django
     docker:
-      - image: circleci/python:3.9.6
+      - image: python:3.9.6-alpine
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/geojson_db
@@ -52,10 +52,28 @@ jobs:
       - run:
           name: Install Dependencies
           command: |
-            sudo pip uninstall poetry -y
-            sudo pip install poetry==1.2.2
+            pip uninstall poetry -y
+            pip install poetry==1.2.2
+            apk update \
+                && apk upgrade \
+                && apk add --update --no-cache --virtual \
+                build-base \
+                gcc \
+                libc-dev \
+                linux-headers \
+                libffi-dev \
+                musl-dev \
+                zlib \
+                zlib-dev \
+                bash \
+                postgresql-client \
+                postgresql-dev \
+                curl-dev \
+                geos \
+                proj \
+                gdal
             poetry install
-            sudo apt update && sudo apt install -y gdal-bin python3-gdal
+
       - run:
           name: Wait for Postgres
           command: |

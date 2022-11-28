@@ -1,4 +1,5 @@
 import os
+from glob import glob
 from pathlib import Path
 
 import environ
@@ -14,6 +15,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Take environment variables from .env file
 environ.Env.read_env(os.path.join(BASE_DIR, "../geojsonapi/.env"))
 
+GDAL_LIBRARY_PATH = glob(env("GDAL_LIBRARY_PATH"))[0]
+GEOS_LIBRARY_PATH = glob(env("GEOS_LIBRARY_PATH"))[0]
+
 # False if not in os.environ because of casting above
 DEBUG = env("DEBUG")
 
@@ -21,7 +25,7 @@ DEBUG = env("DEBUG")
 # exception if SECRET_KEY not in os.environ
 SECRET_KEY = env("SECRET_KEY", default="supersecretkey")
 
-ALLOWED_HOSTS = ["localhost", "localhost:8001", "127.0.0.1", "127.0.0.1:8000"]
+ALLOWED_HOSTS = ["localhost", "localhost:8000", "127.0.0.1", "127.0.0.1:8000"]
 CSRF_TRUSTED_ORIGINS = ["http://" + host for host in ALLOWED_HOSTS]
 
 allowed_hosts = env.list("ALLOWED_HOSTS", default=None)
@@ -38,6 +42,7 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.gis",
 ]
 
 MY_APPS = ["geojsonapi.apps.users", "geojsonapi.apps.providers"]
@@ -93,6 +98,7 @@ DATABASES = {
     "default": env.db(),
 }
 
+DATABASES["default"]["ENGINE"] = ("django.contrib.gis.db.backends.postgis",)
 DATABASES["default"]["TEST"] = {"NAME": "test_geojson"}
 
 # Password validation

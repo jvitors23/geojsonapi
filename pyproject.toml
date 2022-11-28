@@ -39,7 +39,6 @@ build-backend = "poetry.core.masonry.api"
 python_files = ["test_*.py", "*_test.py", "tests.py"]
 env = [
     "DJANGO_SETTINGS_MODULE=geojsonapi.settings",
-    "DATABASE_URL=postgres://postgres:postgres@localhost:5432/geojson_db",
 ]
 filterwarnings = [
      "ignore:The --rsyncdir command line argument and rsyncdirs config variable are deprecated.:DeprecationWarning",

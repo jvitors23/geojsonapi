@@ -38,6 +38,8 @@ jobs:
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/geojson_db
+          GDAL_LIBRARY_PATH: /usr/lib/libgdal.so.*
+          GEOS_LIBRARY_PATH: /usr/lib/libgeos_c.so.*
 
       - image: postgis/postgis:15-master
         environment:
@@ -53,6 +55,7 @@ jobs:
             sudo pip uninstall poetry -y
             sudo pip install poetry==1.2.2
             poetry install
+            sudo apt install proj geos gdal
       - run:
           name: Wait for Postgres
           command: |

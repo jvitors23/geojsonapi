@@ -105,7 +105,7 @@ class TestPrivateUserApi:
         """Test retrieve profile for logged in user"""
         response = authenticated_api_client.get(ME_URL)
         assert response.status_code == status.HTTP_200_OK
-        assert response.data == {"name": user.name, "email": user.email}
+        assert response.data == {"name": user.name, "email": user.email, "id": user.id}
 
     def test_post_me_not_allowed(self, authenticated_api_client: APIClient) -> None:
         """Test a post is not allowed on the ME URL"""

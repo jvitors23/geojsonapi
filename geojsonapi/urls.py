@@ -12,6 +12,7 @@ urlpatterns = [
     path("api/swagger/", SpectacularSwaggerView.as_view(url_name="api-schema"), name="api-swagger"),
     path(f"api/{API_VERSION}/users/", include("geojsonapi.apps.users.urls")),
     path(f"api/{API_VERSION}/providers/", include("geojsonapi.apps.providers.urls")),
+    path(f"api/{API_VERSION}/serviceareas/", include("geojsonapi.apps.serviceareas.urls")),
 ]
 
 if settings.DEBUG:

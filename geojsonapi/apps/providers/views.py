@@ -10,3 +10,7 @@ class ProviderViewset(ModelViewSet):
     queryset = Provider.objects.all()
     serializer_class = ProviderSerializer
     permission_classes = [IsAuthenticated, OwnProviderPermission]
+
+    def perform_create(self, serializer):
+        serializer.validated_data["owner"] = self.request.user
+        return super().perform_create(serializer)

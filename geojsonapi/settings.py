@@ -45,7 +45,11 @@ DJANGO_APPS = [
     "django.contrib.gis",
 ]
 
-MY_APPS = ["geojsonapi.apps.users", "geojsonapi.apps.providers"]
+MY_APPS = [
+    "geojsonapi.apps.users",
+    "geojsonapi.apps.providers",
+    "geojsonapi.apps.serviceareas",
+]
 
 THIRD_PARTY_APPS = [
     "rest_framework",

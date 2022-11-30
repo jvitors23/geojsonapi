@@ -31,7 +31,6 @@ class TestProvidersAPI:
             "phone_number": "7512345678",
             "language": "en",
             "currency": "USD",
-            "owner": user.id,
         }
         response = authenticated_api_client.post(self.PROVIDERS_URL, payload)
         assert response.status_code == status.HTTP_201_CREATED
@@ -82,7 +81,6 @@ class TestProvidersAPI:
         self, authenticated_api_client: APIClient, user: User, invalid_payload: Dict
     ) -> None:
         """Test that creating a provider with invalid payload fails"""
-        invalid_payload["owner"] = user.id
         response = authenticated_api_client.post(self.PROVIDERS_URL, invalid_payload)
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert Provider.objects.all().count() == 0
@@ -97,7 +95,6 @@ class TestProvidersAPI:
             "phone_number": "7512345678",
             "language": "en",
             "currency": "USD",
-            "owner": user.id,
         }
         url = f"{self.PROVIDERS_URL}{provider.id}/"
         response = authenticated_api_client.put(url, payload)
@@ -230,7 +227,6 @@ class TestProvidersAPI:
             "phone_number": "7512345678",
             "language": "en",
             "currency": "USD",
-            "owner": provider.owner_id,
         }
         response = authenticated_api_client.post(self.PROVIDERS_URL, payload)
 

@@ -1,0 +1,46 @@
+FROM python:3.9.6-alpine
+MAINTAINER jvitors23
+
+ENV PYTHONUNBUFFERED 1
+ENV POETRY_VERSION=1.2.2
+ENV POETRY_VIRTUALENVS_CREATE=false
+ENV POETRY_CACHE_DIR='/var/cache/pypoetry'
+
+RUN apk update \
+    && apk upgrade \
+    && apk add --update --no-cache --virtual \
+    build-base \
+    gcc \
+    libc-dev \
+    linux-headers \
+    libffi-dev \
+    musl-dev \
+    zlib \
+    zlib-dev \
+    bash \
+    postgresql-client \
+    postgresql-dev \
+    curl-dev \
+    geos \
+    proj \
+    gdal
+
+RUN python -m pip install --upgrade pip \
+    && pip install "poetry==$POETRY_VERSION" \
+    && poetry --version
+
+RUN mkdir /app
+WORKDIR /app
+
+COPY . .
+
+RUN poetry install
+
+RUN mkdir -p /vol/web/media
+RUN mkdir -p /vol/web/static
+
+EXPOSE 8000
+
+RUN chmod +x ./entrypoint.sh
+
+ENTRYPOINT ["./entrypoint.sh"]

@@ -23,7 +23,7 @@ Simple rest API that allows the user to CRUD providers and service areas. This p
 
 ### About the project
 
-The django project has three apps:
+The django project has three main apps:
 
 * users: Deals with the user sign up and api token request;
   * POST ```/api/v1/users/signup/```: Sign up of new users;

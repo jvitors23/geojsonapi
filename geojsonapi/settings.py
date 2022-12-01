@@ -31,6 +31,9 @@ allowed_hosts = env.list("ALLOWED_HOSTS", default=None)
 if allowed_hosts:
     ALLOWED_HOSTS.extend(allowed_hosts)
 
+CSRF_TRUSTED_ORIGINS = ["http://" + host for host in ALLOWED_HOSTS]
+CSRF_TRUSTED_ORIGINS += ["https://" + host for host in ALLOWED_HOSTS]
+
 
 # Application definition
 
@@ -137,8 +140,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

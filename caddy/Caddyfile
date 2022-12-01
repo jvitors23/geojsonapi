@@ -1,0 +1,10 @@
+{$MY_DOMAIN} {
+    handle /static* {
+        root * /var/
+        file_server
+    }
+
+    handle /* {
+        reverse_proxy djangoAPP:8000
+    }
+}

@@ -5,6 +5,6 @@
     }
 
     handle /* {
-        reverse_proxy djangoAPP:8000
+        reverse_proxy {$DJANGO_SERVICE}:{$DJANGO_PORT}
     }
 }

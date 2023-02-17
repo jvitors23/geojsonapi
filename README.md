@@ -3,7 +3,7 @@
 [![<jvitors23>](https://circleci.com/gh/jvitors23/geojsonapi.svg?style=shield)](https://circleci.com/gh/jvitors23/geojsonapi)
 
 
-Simple rest API that allows the user to CRUD providers and service areas. This project was deployed to AWS using ECS - Elastic Container Service.
+Simple rest API that allows the user to CRUD providers and service areas. This project was deployed to AWS using ECS - Elastic Container Service ([link to deployed app](https://geojson.18.204.47.205.sslip.io/api/swagger/)).
 
 
 ### Technologies
@@ -23,7 +23,7 @@ Simple rest API that allows the user to CRUD providers and service areas. This p
 
 ### About the project
 
-The django project has three apps:
+The django project has three main apps:
 
 * users: Deals with the user sign up and api token request;
   * POST ```/api/v1/users/signup/```: Sign up of new users;
